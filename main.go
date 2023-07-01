@@ -1,15 +1,10 @@
 package main
 
-import (
-	"fmt"
-	"os"
-)
+import "net/http"
 
 func main() {
-	message := os.Getenv("MESSAGE")
-	if message == "" {
-		message = "Full Cycle Rocks!!"
-	}
-
-	fmt.Println(message)
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("Hello World"))
+	})
+	http.ListenAndServe(":8080", nil)
 }
